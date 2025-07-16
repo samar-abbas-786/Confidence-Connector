@@ -135,15 +135,20 @@ const Footer = () => {
                 <div className="space-y-3">
                   <div className="flex items-center space-x-3">
                     <Mail className="h-5 w-5 text-blue-400" />
-                    <span className="text-gray-400">info@smarthealth.ai</span>
+                    <span className="text-gray-400">
+                      confidence.connector@myyahoo.com
+                    </span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <Phone className="h-5 w-5 text-blue-400" />
-                    <span className="text-gray-400">+1 (555) 123-4567</span>
+                    <span className="text-gray-400">+91 8449391441</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <MapPin className="h-5 w-5 text-blue-400" />
-                    <span className="text-gray-400">Silicon Valley, CA</span>
+                    <span className="text-gray-400">
+                      {" "}
+                      FM Tower Aligarh, Uttar Pradesh, India 202122
+                    </span>
                   </div>
                 </div>
               </div>
