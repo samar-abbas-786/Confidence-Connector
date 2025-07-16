@@ -50,7 +50,7 @@ const SmartHealthcareUI = () => {
       <Team />
 
       {/* Mentors Section */}
-      {/* <Mentors /> */}
+      <Mentors />
 
       {/* Statistics Section */}
       <Statistics />
