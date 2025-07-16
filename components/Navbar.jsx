@@ -21,6 +21,7 @@ import {
   BarChart3,
   Zap,
 } from "lucide-react";
+import Image from "next/image";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 

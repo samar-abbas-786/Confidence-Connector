@@ -1,24 +1,4 @@
-import {
-  Heart,
-  Activity,
-  Stethoscope,
-  Brain,
-  Shield,
-  Users,
-  Phone,
-  Mail,
-  MapPin,
-  Menu,
-  X,
-  ChevronRight,
-  Monitor,
-  MessageCircle,
-  Database,
-  UserCheck,
-  Thermometer,
-  BarChart3,
-  Zap,
-} from "lucide-react";
+
 export default function Mentors() {
   return (
     <section id="mentors" className="py-20 bg-gray-50">
