@@ -38,7 +38,7 @@ const Testimonial = () => {
                 testimonial:
                   "Having my health monitored 24/7 gives me peace of mind. The AI chatbot helps me understand my symptoms and when to seek medical attention.",
                 image:
-                  "https://images.unsplash.com/photo-1494790108755-2616b9d9c87f?w=400&h=400&fit=crop&crop=face",
+                  "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=400&h=400&fit=crop&crop=face",
               },
               {
                 name: "Dr. Kevin Park",

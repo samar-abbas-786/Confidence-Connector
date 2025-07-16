@@ -8,72 +8,67 @@ export default function Team() {
       role: "Director and Founder",
       image: "/saifmalik.jpg",
       description:
-        "Director and Founder and a Mechanical Engineer known for his visionary leadership and strategic approach to innovation.",
+        "Visionary leader and Mechanical Engineer driving strategic innovation.",
     },
     {
       name: "Mr. Abdul Wahid",
       role: "Production Head",
       image: "/Abdul Wahid.jpg",
-      description:
-        "Production Head and a Mechanical Engineer, ensures efficient operations with a focus on precision and quality.",
+      description: "Leads efficient and quality-focused production operations.",
     },
     {
       name: "Mr. Aman Khan",
       role: "Sales and Marketing Head",
       image: "/Mr.Aman Khan.jpg",
-      description:
-        "Sales and Marketing Head with a background in Electrical Engineering, drives growth through strategic outreach and innovative market solutions.",
+      description: "Drives growth through strategic marketing and outreach.",
     },
     {
       name: "Mr. Mohd Affan",
       role: "Quality Head",
       image: "/mohdaffan.webp",
-      description:
-        "Quality Head and Mechanical Engineer, ensures product excellence through rigorous quality standards and attention to detail.",
+      description: "Ensures top-tier product quality through strict standards.",
     },
     {
       name: "Mr. Amaan Ullah",
       role: "Senior Mechanical Engineer",
       image: "/amaanmultani.jpg",
       description:
-        "Senior Mechanical Engineer, brings expertise and dedication to delivering high-precision engineering solutions.",
+        "Expert in precision-driven mechanical engineering solutions.",
     },
     {
       name: "Mr. Arham Sajid",
       role: "Senior Mechanical Engineer",
       image: "/arhamsajid.jpg",
-      description:
-        "Senior Mechanical Engineer, specializes in advanced mechanical systems with a strong focus on innovation and reliability.",
+      description: "Innovates in advanced mechanical system development.",
     },
     {
       name: "Mr. Samar Abbas",
       role: "CS and IT Associate",
       image: "/samar.jpg",
       description:
-        "Senior Mechanical Engineer, specializes in advanced mechanical systems with a strong focus on innovation and reliability.",
+        "Full Stack Developer focused on AI, automation, and scalable web solutions.",
     },
     {
       name: "Mr. Mohd Athar",
       role: "CS and IT Associate",
       image: "/athar.jpg",
       description:
-        "Senior Mechanical Engineer, specializes in advanced mechanical systems with a strong focus on innovation and reliability.",
+        "Backend Developer specializing in secure, scalable systems.",
     },
     {
       name: "Miss Daniya Parveen",
       role: "Web Developer and Technical HR",
       image: "/daniya.jpg",
-      description:
-        "Web Developer and Technical HR, combines technical skills with team coordination to support development and hiring.",
+      description: "Blends web development with technical HR expertise.",
     },
     {
       name: "Miss Imanica Hussain",
       role: "Web Developer and CS HR",
       image: "/imanica.jpg",
-      description:
-        "Leverages her Computer Science background to support both technical development and team management.",
+      description: "Supports development and HR with a CS background.",
     },
   ];
+
   return (
     <section id="team" className="py-12 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
