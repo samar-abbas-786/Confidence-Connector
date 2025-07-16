@@ -2,6 +2,78 @@
 import RevealScroll from "./Reveal";
 
 export default function Team() {
+  const Teammembers = [
+    {
+      name: "Mr. Saif Malik",
+      role: "Director and Founder",
+      image: "/saifmalik.jpg",
+      description:
+        "Director and Founder and a Mechanical Engineer known for his visionary leadership and strategic approach to innovation.",
+    },
+    {
+      name: "Mr. Abdul Wahid",
+      role: "Production Head",
+      image: "/Abdul Wahid.jpg",
+      description:
+        "Production Head and a Mechanical Engineer, ensures efficient operations with a focus on precision and quality.",
+    },
+    {
+      name: "Mr. Aman Khan",
+      role: "Sales and Marketing Head",
+      image: "/Mr.Aman Khan.jpg",
+      description:
+        "Sales and Marketing Head with a background in Electrical Engineering, drives growth through strategic outreach and innovative market solutions.",
+    },
+    {
+      name: "Mr. Mohd Affan",
+      role: "Quality Head",
+      image: "/mohdaffan.webp",
+      description:
+        "Quality Head and Mechanical Engineer, ensures product excellence through rigorous quality standards and attention to detail.",
+    },
+    {
+      name: "Mr. Amaan Ullah",
+      role: "Senior Mechanical Engineer",
+      image: "/amaanmultani.jpg",
+      description:
+        "Senior Mechanical Engineer, brings expertise and dedication to delivering high-precision engineering solutions.",
+    },
+    {
+      name: "Mr. Arham Sajid",
+      role: "Senior Mechanical Engineer",
+      image: "/arhamsajid.jpg",
+      description:
+        "Senior Mechanical Engineer, specializes in advanced mechanical systems with a strong focus on innovation and reliability.",
+    },
+    {
+      name: "Mr. Samar Abbas",
+      role: "CS and IT Associate",
+      image: "/samar.jpg",
+      description:
+        "Senior Mechanical Engineer, specializes in advanced mechanical systems with a strong focus on innovation and reliability.",
+    },
+    {
+      name: "Mr. Mohd Athar",
+      role: "CS and IT Associate",
+      image: "/athar.jpg",
+      description:
+        "Senior Mechanical Engineer, specializes in advanced mechanical systems with a strong focus on innovation and reliability.",
+    },
+    {
+      name: "Miss Daniya Parveen",
+      role: "Web Developer and Technical HR",
+      image: "/daniya.jpg",
+      description:
+        "Web Developer and Technical HR, combines technical skills with team coordination to support development and hiring.",
+    },
+    {
+      name: "Miss Imanica Hussain",
+      role: "Web Developer and CS HR",
+      image: "/imanica.jpg",
+      description:
+        "Leverages her Computer Science background to support both technical development and team management.",
+    },
+  ];
   return (
     <section id="team" className="py-12 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -20,68 +92,7 @@ export default function Team() {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {[
-            {
-              name: "Dr. Sarah Johnson",
-              role: "Lead AI Researcher",
-              image:
-                "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop&crop=face",
-              description:
-                "Expert in machine learning and healthcare AI systems",
-            },
-            {
-              name: "Michael Chen",
-              role: "IoT Developer",
-              image:
-                "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
-              description:
-                "Specialist in sensor integration and real-time data processing",
-            },
-            {
-              name: "Emily Rodriguez",
-              role: "Frontend Developer",
-              image:
-                "https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=400&h=400&fit=crop&crop=face",
-              description: "UI/UX expert focused on healthcare user experience",
-            },
-            {
-              name: "David Kim",
-              role: "Backend Engineer",
-              image:
-                "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
-              description: "Database architect and API development specialist",
-            },
-            {
-              name: "Dr. Sarah Johnson",
-              role: "Lead AI Researcher",
-              image:
-                "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop&crop=face",
-              description:
-                "Expert in machine learning and healthcare AI systems",
-            },
-            {
-              name: "Michael Chen",
-              role: "IoT Developer",
-              image:
-                "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
-              description:
-                "Specialist in sensor integration and real-time data processing",
-            },
-            {
-              name: "Emily Rodriguez",
-              role: "Frontend Developer",
-              image:
-                "https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=400&h=400&fit=crop&crop=face",
-              description: "UI/UX expert focused on healthcare user experience",
-            },
-            {
-              name: "David Kim",
-              role: "Backend Engineer",
-              image:
-                "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
-              description: "Database architect and API development specialist",
-            },
-          ].map((member, index) => (
+          {Teammembers.map((member, index) => (
             <RevealScroll key={index} delay={0.18 * index}>
               <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
                 <div className="relative">
