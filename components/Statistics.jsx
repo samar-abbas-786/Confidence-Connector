@@ -1,25 +1,8 @@
-import {
-  Heart,
-  Activity,
-  Stethoscope,
-  Brain,
-  Shield,
-  Users,
-  Phone,
-  Mail,
-  MapPin,
-  Menu,
-  X,
-  ChevronRight,
-  Monitor,
-  MessageCircle,
-  Database,
-  UserCheck,
-  Thermometer,
-  BarChart3,
-  Zap,
-} from "lucide-react";
+import { useView } from "@/context/viewContext";
+import CountUp from "react-countup";
 const Statistics = () => {
+  const { ref, isView } = useView();
+
   return (
     <div>
       <section className="py-20 bg-white">
@@ -33,10 +16,14 @@ const Statistics = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div ref={ref} className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center">
               <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-6 rounded-xl mb-4">
-                <div className="text-4xl font-bold text-white">95%</div>
+                <div className="text-4xl font-bold text-white">
+                  {isView && (
+                    <CountUp start={0} duration={3} end={95} suffix="%" />
+                  )}
+                </div>
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
                 Accuracy Rate
@@ -60,7 +47,12 @@ const Statistics = () => {
 
             <div className="text-center">
               <div className="bg-gradient-to-r from-purple-600 to-pink-600 p-6 rounded-xl mb-4">
-                <div className="text-4xl font-bold text-white">50K+</div>
+                <div className="text-4xl font-bold text-white">
+                  {" "}
+                  {isView && (
+                    <CountUp start={0} duration={3} end={50} suffix="K+" />
+                  )}
+                </div>
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
                 Patients
@@ -72,7 +64,11 @@ const Statistics = () => {
 
             <div className="text-center">
               <div className="bg-gradient-to-r from-orange-600 to-red-600 p-6 rounded-xl mb-4">
-                <div className="text-4xl font-bold text-white">80%</div>
+                <div className="text-4xl font-bold text-white">
+                  {isView && (
+                    <CountUp start={0} duration={3} end={80} suffix="%" />
+                  )}
+                </div>
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
                 Faster

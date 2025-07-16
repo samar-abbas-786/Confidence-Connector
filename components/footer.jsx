@@ -1,160 +1,153 @@
-import {
-  Heart,
-  Activity,
-  Stethoscope,
-  Brain,
-  Shield,
-  Users,
-  Phone,
-  Mail,
-  MapPin,
-  Menu,
-  X,
-  ChevronRight,
-  Monitor,
-  MessageCircle,
-  Database,
-  UserCheck,
-  Thermometer,
-  BarChart3,
-  Zap,
-} from "lucide-react";
-const footer = () => {
+"use client";
+import { Heart, Activity, Users, Phone, Mail, MapPin } from "lucide-react";
+import RevealScroll from "./Reveal"; // make sure RevealScroll component is accessible
+
+const Footer = () => {
   return (
     <div>
       <footer id="contact" className="bg-gray-900 text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Company Info */}
-            <div>
-              <div className="flex items-center space-x-2 mb-4">
-                <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-2 rounded-lg">
-                  <Heart className="h-6 w-6 text-white" />
+            <RevealScroll delay={0.1}>
+              <div>
+                <div className="flex items-center space-x-2 mb-4">
+                  <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-2 rounded-lg">
+                    <Heart className="h-6 w-6 text-white" />
+                  </div>
+                  <span className="text-2xl font-bold">
+                    Confidence Connector
+                  </span>
                 </div>
-                <span className="text-2xl font-bold">Confidence Connector</span>
+                <p className="text-gray-400 mb-4">
+                  Transforming healthcare through intelligent monitoring and
+                  AI-powered diagnostics.
+                </p>
+                <div className="flex space-x-4">
+                  <a
+                    href="#"
+                    className="text-gray-400 hover:text-white transition-colors"
+                  >
+                    <Users className="h-5 w-5" />
+                  </a>
+                  <a
+                    href="#"
+                    className="text-gray-400 hover:text-white transition-colors"
+                  >
+                    <Activity className="h-5 w-5" />
+                  </a>
+                  <a
+                    href="#"
+                    className="text-gray-400 hover:text-white transition-colors"
+                  >
+                    <Heart className="h-5 w-5" />
+                  </a>
+                </div>
               </div>
-              <p className="text-gray-400 mb-4">
-                Transforming healthcare through intelligent monitoring and
-                AI-powered diagnostics.
-              </p>
-              <div className="flex space-x-4">
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  <Users className="h-5 w-5" />
-                </a>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  <Activity className="h-5 w-5" />
-                </a>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  <Heart className="h-5 w-5" />
-                </a>
-              </div>
-            </div>
+            </RevealScroll>
 
             {/* Quick Links */}
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
-              <ul className="space-y-2">
-                <li>
-                  <a
-                    href="#home"
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    Home
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#about"
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    About
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#features"
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    Features
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#team"
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    Team
-                  </a>
-                </li>
-              </ul>
-            </div>
+            <RevealScroll delay={0.2}>
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+                <ul className="space-y-2">
+                  <li>
+                    <a
+                      href="#home"
+                      className="text-gray-400 hover:text-white transition-colors"
+                    >
+                      Home
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#about"
+                      className="text-gray-400 hover:text-white transition-colors"
+                    >
+                      About
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#features"
+                      className="text-gray-400 hover:text-white transition-colors"
+                    >
+                      Features
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#team"
+                      className="text-gray-400 hover:text-white transition-colors"
+                    >
+                      Team
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </RevealScroll>
 
             {/* Services */}
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Services</h3>
-              <ul className="space-y-2">
-                <li>
-                  <a
-                    href="#"
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    Health Monitoring
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    AI Diagnostics
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    Telemedicine
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    Data Analytics
-                  </a>
-                </li>
-              </ul>
-            </div>
+            <RevealScroll delay={0.3}>
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Services</h3>
+                <ul className="space-y-2">
+                  <li>
+                    <a
+                      href="#"
+                      className="text-gray-400 hover:text-white transition-colors"
+                    >
+                      Health Monitoring
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className="text-gray-400 hover:text-white transition-colors"
+                    >
+                      AI Diagnostics
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className="text-gray-400 hover:text-white transition-colors"
+                    >
+                      Telemedicine
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className="text-gray-400 hover:text-white transition-colors"
+                    >
+                      Data Analytics
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </RevealScroll>
 
             {/* Contact */}
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
-              <div className="space-y-3">
-                <div className="flex items-center space-x-3">
-                  <Mail className="h-5 w-5 text-blue-400" />
-                  <span className="text-gray-400">info@smarthealth.ai</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <Phone className="h-5 w-5 text-blue-400" />
-                  <span className="text-gray-400">+1 (555) 123-4567</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <MapPin className="h-5 w-5 text-blue-400" />
-                  <span className="text-gray-400">Silicon Valley, CA</span>
+            <RevealScroll delay={0.4}>
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
+                <div className="space-y-3">
+                  <div className="flex items-center space-x-3">
+                    <Mail className="h-5 w-5 text-blue-400" />
+                    <span className="text-gray-400">info@smarthealth.ai</span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <Phone className="h-5 w-5 text-blue-400" />
+                    <span className="text-gray-400">+1 (555) 123-4567</span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <MapPin className="h-5 w-5 text-blue-400" />
+                    <span className="text-gray-400">Silicon Valley, CA</span>
+                  </div>
                 </div>
               </div>
-            </div>
+            </RevealScroll>
           </div>
 
           <div className="border-t border-gray-800 mt-12 pt-8 text-center">
@@ -169,4 +162,4 @@ const footer = () => {
   );
 };
 
-export default footer;
+export default Footer;
