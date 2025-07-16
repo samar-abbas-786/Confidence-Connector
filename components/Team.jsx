@@ -1,24 +1,3 @@
-import {
-  Heart,
-  Activity,
-  Stethoscope,
-  Brain,
-  Shield,
-  Users,
-  Phone,
-  Mail,
-  MapPin,
-  Menu,
-  X,
-  ChevronRight,
-  Monitor,
-  MessageCircle,
-  Database,
-  UserCheck,
-  Thermometer,
-  BarChart3,
-  Zap,
-} from "lucide-react";
 export default function Team() {
   return (
     <section id="team" className="py-20 bg-white">
