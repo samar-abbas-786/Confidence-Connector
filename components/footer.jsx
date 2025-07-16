@@ -159,8 +159,8 @@ const footer = () => {
 
           <div className="border-t border-gray-800 mt-12 pt-8 text-center">
             <p className="text-gray-400">
-              © 2024 Confidence Connector. All rights reserved. | Privacy Policy
-              | Terms of Service
+              © {new Date().getFullYear()} Confidence Connector. All rights
+              reserved. | Privacy Policy | Terms of Service
             </p>
           </div>
         </div>

@@ -1,4 +1,3 @@
-
 export default function Mentors() {
   return (
     <section id="mentors" className="py-20 bg-gray-50">
