@@ -13,7 +13,7 @@ export default function Team() {
     {
       name: "Mr. Abdul Wahid",
       role: "Production Head",
-      image: "/Abdul Wahid.jpg",
+      image: "/Abdul-wahid.jpg",
       description: "Leads efficient and quality-focused production operations.",
     },
     {
