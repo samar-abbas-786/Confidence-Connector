@@ -1,6 +1,6 @@
 "use client";
 import { Heart, Activity, Users, Phone, Mail, MapPin } from "lucide-react";
-import RevealScroll from "./Reveal"; // make sure RevealScroll component is accessible
+import RevealScroll from "../Reveal"; // make sure RevealScroll component is accessible
 
 const Footer = () => {
   return (

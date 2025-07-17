@@ -33,8 +33,8 @@ const Navbar = () => {
   };
 
   const goToRegister = () => {
-    router.push('/register');
-  }
+    router.push("/register");
+  };
 
   return (
     <div>
@@ -185,7 +185,10 @@ const Navbar = () => {
 
               {/* Mobile CTA Button */}
               <div className="pt-4 pb-2 hover:cursor-pointer">
-                <button onClick = {goToRegister} className="w-full hover:cursor-pointer px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+                <button
+                  onClick={goToRegister}
+                  className="w-full hover:cursor-pointer px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+                >
                   Get Started
                 </button>
               </div>

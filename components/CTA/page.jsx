@@ -1,5 +1,5 @@
 "use client";
-import RevealScroll from "./Reveal"; // Ensure this is correctly imported
+import RevealScroll from "../Reveal"; // Ensure this is correctly imported
 
 const CTA = () => {
   return (

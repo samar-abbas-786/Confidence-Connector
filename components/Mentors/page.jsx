@@ -1,4 +1,4 @@
-import RevealScroll from "./Reveal";
+import RevealScroll from "../Reveal";
 
 export default function Mentors() {
   const Mentors = [

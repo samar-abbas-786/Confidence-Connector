@@ -8,7 +8,7 @@ import {
   BarChart3,
   Zap,
 } from "lucide-react";
-import RevealScroll from "./Reveal";
+import RevealScroll from "../Reveal";
 
 const Features = () => {
   return (

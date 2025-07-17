@@ -1,5 +1,5 @@
 "use client";
-import RevealScroll from "./Reveal";
+import RevealScroll from "../Reveal";
 
 const Testimonial = () => {
   return (

@@ -1,6 +1,6 @@
 "use client";
 import { X, Activity, Brain, Shield } from "lucide-react";
-import RevealScroll from "./Reveal"; // Optional if you're using animation
+import RevealScroll from "../Reveal"; // Optional if you're using animation
 
 const AboutUs = () => {
   return (

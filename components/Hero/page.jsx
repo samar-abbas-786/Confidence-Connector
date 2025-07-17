@@ -1,5 +1,5 @@
 import React from "react";
-import RevealScroll from "./Reveal";
+import RevealScroll from "../Reveal";
 
 const Hero = () => {
   return (
