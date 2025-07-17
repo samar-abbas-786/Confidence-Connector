@@ -22,13 +22,19 @@ import {
   Zap,
 } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
+  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  const goToRegister = () => {
+    router.push('/register');
+  }
 
   return (
     <div>
@@ -178,8 +184,8 @@ const Navbar = () => {
               </a>
 
               {/* Mobile CTA Button */}
-              <div className="pt-4 pb-2">
-                <button className="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+              <div className="pt-4 pb-2 hover:cursor-pointer">
+                <button onClick = {goToRegister} className="w-full hover:cursor-pointer px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
                   Get Started
                 </button>
               </div>
