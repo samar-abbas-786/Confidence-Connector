@@ -46,7 +46,7 @@ const Features = () => {
                 description:
                   "Intelligent chatbot for symptom logging and preliminary diagnosis recommendations",
                 icon: <MessageCircle className="h-8 w-8 text-white" />,
-                gradient: "from-green-600 to-blue-600",
+                gradient: "from-blue-600 to-blue-600",
               },
               {
                 title: "Patient Records",
@@ -94,7 +94,7 @@ const Features = () => {
                 description:
                   "Robust backend with comprehensive APIs for data management",
                 icon: <BarChart3 className="h-8 w-8 text-white" />,
-                gradient: "from-green-600 to-blue-600",
+                gradient: "from-blue-600 to-blue-600",
               },
               {
                 title: "Real-time Analytics",

@@ -36,7 +36,7 @@ export default function Mentors() {
           <div className="text-center mb-12">
             {/* Badge */}
             <div className="inline-flex items-center px-3 py-1.5 bg-gradient-to-r from-blue-500/10 to-indigo-500/10 border border-blue-200 rounded-full mb-4 backdrop-blur-sm">
-              <div className="w-1.5 h-1.5 bg-green-500 rounded-full mr-2 animate-pulse"></div>
+              <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2 animate-pulse"></div>
               <span className="text-xs font-medium text-blue-700">
                 Expert Guidance
               </span>

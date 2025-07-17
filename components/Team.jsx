@@ -1,5 +1,5 @@
 "use client";
-import RevealScroll from "../Reveal";
+import RevealScroll from "./Reveal";
 
 export default function Team() {
   const Teammembers = [
@@ -57,7 +57,7 @@ export default function Team() {
     },
     {
       name: "Miss Daniya Parveen",
-      role: "Technical HR and Electronics Head",
+      role: "Web Developer and Technical HR",
       image: "/daniya.jpg",
       description: "Blends web development with technical HR expertise.",
     },

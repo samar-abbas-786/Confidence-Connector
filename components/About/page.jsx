@@ -49,20 +49,20 @@ const AboutUs = () => {
               <div className="space-y-4">
                 {[
                   {
-                    icon: <Activity className="h-5 w-5 text-green-600" />,
+                    icon: <Activity className="h-5 w-5 text-blue-600" />,
                     text: "Real-time body parameter monitoring via IoT sensors",
                   },
                   {
-                    icon: <Brain className="h-5 w-5 text-green-600" />,
+                    icon: <Brain className="h-5 w-5 text-blue-600" />,
                     text: "AI-assisted chatbot for symptom logging and diagnosis",
                   },
                   {
-                    icon: <Shield className="h-5 w-5 text-green-600" />,
+                    icon: <Shield className="h-5 w-5 text-blue-600" />,
                     text: "Secure patient history management and consultation recommendations",
                   },
                 ].map((item, index) => (
                   <div key={index} className="flex items-start space-x-3">
-                    <div className="bg-green-100 p-2 rounded-lg">
+                    <div className="bg-blue-100 p-2 rounded-lg">
                       {item.icon}
                     </div>
                     <p className="text-gray-700">{item.text}</p>

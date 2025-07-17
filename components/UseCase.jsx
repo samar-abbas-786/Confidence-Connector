@@ -1,6 +1,6 @@
 "use client";
 import { Activity, Stethoscope, Shield, Zap } from "lucide-react";
-import RevealScroll from "../Reveal";
+import RevealScroll from "./Reveal";
 
 const UseCase = () => {
   return (
