@@ -58,13 +58,13 @@ const Features = () => {
               {
                 title: "Doctor Consultation",
                 description:
-                  "Smart consultation recommendations based on symptoms and health data analysis",
+                  "Smart consultation recommendations based on symptoms and  data analysis",
                 icon: <UserCheck className="h-8 w-8 text-white" />,
                 gradient: "from-orange-600 to-red-600",
               },
             ].map((feature, index) => (
               <RevealScroll key={index} delay={0.1 * (index + 1)}>
-                <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
                   <div
                     className={`bg-gradient-to-r ${feature.gradient} p-3 rounded-lg w-fit mb-4`}
                   >
