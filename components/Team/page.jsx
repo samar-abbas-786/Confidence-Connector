@@ -53,7 +53,7 @@ export default function Team() {
       role: "CS and IT Associate",
       image: "/athar.jpg",
       description:
-        "Backend Developer specializing in secure, scalable systems.",
+        "MERN stack developer with expertise in delivering scalable web applications",
     },
     {
       name: "Miss Daniya Parveen",
