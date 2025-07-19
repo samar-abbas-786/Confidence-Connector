@@ -10,7 +10,7 @@ import Statistics from "@/components/Statistics/page";
 import UseCase from "@/components/UseCase/page";
 import Testimonial from "@/components/Testimonial/page";
 import CTA from "@/components/CTA/page";
-import Footer from "@/components/footer/page";
+import Footer from "@/components/Footer/page";
 
 const SmartHealthcareUI = () => {
   return (
