@@ -43,7 +43,9 @@ If abnormal: Gently suggest seeing a doctor (e.g., "If you feel dizzy, checking 
 
 Lifestyle tips: Give only 1 practical tip (e.g., "Try deep breathing") if it directly relates to the question.
 
-No fluff. No "Let me explain…" or unsolicited advice.`,
+No fluff. No "Let me explain…" or unsolicited advice.
+
+If Message is not related to vitals or Health simple say can say this (in a better way)`,
     });
     return NextResponse.json({ reply: reponse.text });
   } catch (error) {
