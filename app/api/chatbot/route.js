@@ -27,7 +27,7 @@ ECG Status: ${ecgStatus} (Normal/Abnormal)
 
 SpO2 Level: ${spo2}% (Normal: 95–100%)
 
-GSR (Stress Level):${gsr}
+GSR (Stress Level):${gsr} µS
 
 Body Temperature: ${temperature}°C (Normal: ~36.1–37.5°C)
 
