@@ -30,7 +30,7 @@ export default function Chatbot() {
           ecgStatus: "Normal",
           spo2: 94,
           temperature: 37.3,
-          gsr:7
+          gsr: 7,
         }),
       });
 
@@ -110,7 +110,7 @@ export default function Chatbot() {
         </div>
 
         {/* Chat Area with Custom Scrollbar */}
-        <div className="flex-1 p-4 overflow-y-auto bg-gray-50 space-y-4 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
+        <div className="flex-1 p-4  overflow-y-auto bg-gray-50 space-y-4 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
           {messages.length === 0 && (
             <div className="text-center py-8">
               <div className="w-16 h-16 bg-gradient-to-r from-blue-100 to-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -126,7 +126,7 @@ export default function Chatbot() {
           {messages.map((msg, i) => (
             <div
               key={i}
-              className={`flex items-start space-x-3 animate-in slide-in-from-bottom-4 duration-300 ${
+              className={`flex items-start space-x-3 pt-5 animate-in slide-in-from-bottom-4 duration-300 ${
                 msg.role === "user" ? "flex-row-reverse space-x-reverse" : ""
               }`}
             >
