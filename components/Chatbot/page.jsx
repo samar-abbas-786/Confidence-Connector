@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 
-// Using Lucide React icons instead of react-icons
 import { X, MessageCircle, Send, Bot, User } from "lucide-react";
 
 export default function Chatbot() {
@@ -26,10 +25,10 @@ export default function Chatbot() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           message,
-          heartRate: 88,
+          heartRate: 85,
           ecgStatus: "Normal",
-          spo2: 94,
-          temperature: 37.3,
+          spo2: 96,
+          temperature: 36.7,
           gsr: 7,
         }),
       });
@@ -41,7 +40,7 @@ export default function Chatbot() {
     } catch (err) {
       setMessages((prev) => [
         ...prev,
-        { role: "bot", text: "❌ Error. Please try again." },
+        { role: "bot", text: " Error. Please try again." },
       ]);
     } finally {
       setLoading(false);
@@ -50,7 +49,6 @@ export default function Chatbot() {
 
   return (
     <>
-      {/* Floating Button with Pulse Animation */}
       <button
         onClick={toggleChat}
         className={`fixed bottom-6 right-6 w-16 h-16 rounded-full shadow-2xl transition-all duration-300 ease-in-out z-50 group ${
@@ -79,7 +77,6 @@ export default function Chatbot() {
         </div>
       </button>
 
-      {/* Chat Window with Slide-up Animation */}
       <div
         className={`fixed bottom-24 right-6 w-96 h-[600px] bg-white shadow-2xl rounded-2xl border border-gray-200 flex flex-col z-50 transition-all duration-300 ease-in-out ${
           show
@@ -90,7 +87,6 @@ export default function Chatbot() {
           background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
         }}
       >
-        {/* Glassmorphism Header */}
         <div className="bg-white/10 backdrop-blur-lg text-white p-4 flex items-center justify-between rounded-t-2xl border-b border-white/20">
           <div className="flex items-center space-x-3">
             <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
@@ -109,7 +105,6 @@ export default function Chatbot() {
           </button>
         </div>
 
-        {/* Chat Area with Custom Scrollbar */}
         <div className="flex-1 p-4  overflow-y-auto bg-gray-50 space-y-4 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
           {messages.length === 0 && (
             <div className="text-center py-8">
@@ -130,7 +125,6 @@ export default function Chatbot() {
                 msg.role === "user" ? "flex-row-reverse space-x-reverse" : ""
               }`}
             >
-              {/* Avatar */}
               <div
                 className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
                   msg.role === "user"
@@ -145,7 +139,6 @@ export default function Chatbot() {
                 )}
               </div>
 
-              {/* Message Bubble */}
               <div
                 className={`max-w-[75%] p-3 rounded-2xl shadow-sm ${
                   msg.role === "user"
@@ -183,7 +176,6 @@ export default function Chatbot() {
           )}
         </div>
 
-        {/* Input Area with Gradient Border */}
         <div className="p-4 bg-white border-t border-gray-200 rounded-b-2xl">
           <div className="flex items-center space-x-3">
             <div className="flex-1 relative">
