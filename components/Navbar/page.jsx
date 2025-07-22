@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Heart,
   Activity,
@@ -27,14 +27,22 @@ import { useRouter } from "next/navigation";
 const Navbar = () => {
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [user, setUser] = useState();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
   const goToRegister = () => {
-    router.push("/register");
+    if (user != undefined) {
+      router.push("/report");
+    } else {
+      router.push("/register");
+    }
   };
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("user")));
+  }, []);
 
   return (
     <div>
@@ -115,7 +123,7 @@ const Navbar = () => {
             {/* CTA Button - Desktop */}
             <div className="hidden md:block">
               <button
-                onClick={goToRegister}
+                onClick={() => goToRegister()}
                 className="group relative px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
               >
                 <span className="relative z-10">Get Started</span>
@@ -189,7 +197,7 @@ const Navbar = () => {
               {/* Mobile CTA Button */}
               <div className="pt-4 pb-2 hover:cursor-pointer">
                 <button
-                  onClick={goToRegister}
+                  onClick={() => goToRegister()}
                   className="w-full hover:cursor-pointer px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
                 >
                   Get Started
