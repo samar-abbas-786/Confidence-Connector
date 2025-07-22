@@ -7,7 +7,7 @@ const healthSchema = new mongoose.Schema({
     required: true
   },
   spo2: Number,
-  ecg: String,
+  ecg: Number,
   heartRate: Number,
   bodyTemp: Number,
   gsr: Number,

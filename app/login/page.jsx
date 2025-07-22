@@ -1,24 +1,44 @@
 "use client";
+
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
   const [form, setForm] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const res = await signIn("credentials", {
-      redirect: false,
-      username: form.username,
-      password: form.password,
-    });
+    setIsLoading(true);
+    setError("");
 
-    if (res.ok && !res.error) {
-      router.push("/dashboard");
-    } else {
-      setError(res.error || "Invalid credentials");
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        // Save token and user to localStorage
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+
+        // Redirect to dashboard
+        router.push("/report");
+      } else {
+        setError(data.message || "Login failed");
+      }
+    } catch (err) {
+      console.error("Login error:", err);
+      setError("Something went wrong. Try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -47,14 +67,14 @@ export default function Login() {
           </h1>
           <p className="text-gray-600">
             Sign in to access your{" "}
-            <span className="text-indigo-600"> confidence connector</span>{" "}
+            <span className="text-indigo-600">confidence connector</span>{" "}
             dashboard
           </p>
         </div>
 
         {/* Form Card */}
         <div className="bg-white rounded-3xl shadow-2xl p-8 border border-gray-100 backdrop-blur-sm">
-          {/* Error Message */}
+          {/* Error */}
           {error && (
             <div className="mb-6 p-4 bg-red-50 border-l-4 border-red-500 rounded-xl">
               <div className="flex items-center">
@@ -76,7 +96,7 @@ export default function Login() {
             </div>
           )}
 
-          {/* Username Field */}
+          {/* Username */}
           <div className="mb-6">
             <label className="block text-sm font-semibold text-gray-700 mb-2">
               Username
@@ -109,7 +129,7 @@ export default function Login() {
             </div>
           </div>
 
-          {/* Password Field */}
+          {/* Password */}
           <div className="mb-6">
             <div className="flex items-center justify-between mb-2">
               <label className="block text-sm font-semibold text-gray-700">
@@ -166,7 +186,7 @@ export default function Login() {
             </label>
           </div>
 
-          {/* Submit Button */}
+          {/* Submit */}
           <button
             type="submit"
             onClick={handleLogin}
@@ -201,14 +221,6 @@ export default function Login() {
             )}
           </button>
 
-          {/* Demo Credentials */}
-          {/* <div className="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
-            <p className="text-xs text-blue-700 text-center">
-              <span className="font-semibold">Demo:</span> username: demo,
-              password: password
-            </p>
-          </div> */}
-
           {/* Footer */}
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
@@ -217,7 +229,6 @@ export default function Login() {
                 href={"/register"}
                 type="button"
                 className="text-blue-600 hover:text-blue-700 font-semibold transition-colors"
-                onClick={() => console.log("Navigate to register")}
               >
                 Create one here
               </Link>
