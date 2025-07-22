@@ -60,13 +60,13 @@ export default function Dashboard() {
     fetchData();
   }, []);
 
-  if (loading || !healthData) {
-    return (
-      <div className="min-h-screen flex justify-center items-center text-gray-600">
-        Loading dashboard...
-      </div>
-    );
-  }
+  // if (loading || !healthData) {
+  //   return (
+  //     <div className="min-h-screen flex justify-center items-center text-gray-600">
+  //       Loading dashboard...
+  //     </div>
+  //   );
+  // }
 
   const MetricCard = ({ title, value, unit, status }) => {
     const statusColors = {
@@ -102,17 +102,33 @@ export default function Dashboard() {
               <div>
                 <h3 className="text-lg font-semibold mb-3">Personal Info</h3>
                 <div className="space-y-4">
-                  <p><span className="font-medium">Name:</span> {user.username}</p>
-                  <p><span className="font-medium">Email:</span> {user.email || "N/A"}</p>
-                  <p><span className="font-medium">Status:</span> Active</p>
+                  <p>
+                    <span className="font-medium">Name:</span> {user?.username}
+                  </p>
+                  <p>
+                    <span className="font-medium">Email:</span>{" "}
+                    {user?.email || "N/A"}
+                  </p>
+                  <p>
+                    <span className="font-medium">Status:</span> Active
+                  </p>
                 </div>
               </div>
               <div>
                 <h3 className="text-lg font-semibold mb-3">Health Stats</h3>
                 <div className="space-y-4">
-                  <p><span className="font-medium">ECG:</span> {healthData.ecg ?? "N/A"}</p>
-                  <p><span className="font-medium">SpO₂:</span> {healthData.spo2 ?? "N/A"}%</p>
-                  <p><span className="font-medium">Body Temp:</span> {healthData.bodyTemp ?? "N/A"} °C</p>
+                  <p>
+                    <span className="font-medium">ECG:</span>{" "}
+                    {healthData?.ecg ?? "N/A"}
+                  </p>
+                  <p>
+                    <span className="font-medium">SpO₂:</span>{" "}
+                    {healthData?.spo2 ?? "N/A"}%
+                  </p>
+                  <p>
+                    <span className="font-medium">Body Temp:</span>{" "}
+                    {healthData?.bodyTemp ?? "N/A"} °C
+                  </p>
                 </div>
               </div>
             </div>
@@ -148,35 +164,35 @@ export default function Dashboard() {
           <div className="space-y-6">
             <div className="bg-blue-600 text-white p-6 rounded-lg">
               <h1 className="text-2xl font-bold">
-                Welcome back, {user.username.split(" ")[0]}!
+                Welcome back, {user?.username.split(" ")[0]}!
               </h1>
               <p className="mt-2">
                 Your health metrics are looking good today.
               </p>
             </div>
-          
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               <MetricCard
                 title="SpO₂ Level"
-                value={healthData.spo2 ?? "N/A"}
+                value={healthData?.spo2 ?? "N/A"}
                 unit="%"
                 status="excellent"
               />
               <MetricCard
                 title="Heart Rate"
-                value={healthData.heartRate ?? "N/A"}
+                value={healthData?.heartRate ?? "N/A"}
                 unit="bpm"
                 status="good"
               />
               <MetricCard
                 title="Body Temp"
-                value={healthData.bodyTemp ?? "N/A"}
+                value={healthData?.bodyTemp ?? "N/A"}
                 unit="°C"
                 status="normal"
               />
               <MetricCard
                 title="ECG"
-                value={healthData.ecg ?? "N/A"}
+                value={healthData?.ecg ?? "N/A"}
                 status="normal"
               />
             </div>
@@ -242,14 +258,16 @@ export default function Dashboard() {
         <div className="w-64 bg-white border-r border-gray-200 p-4">
           <div className="flex items-center space-x-3 mb-8 p-2 bg-blue-50 rounded-lg">
             <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold">
-              {user.username
+              {user?.username
                 .split(" ")
                 .map((n) => n[0])
                 .join("")}
             </div>
             <div>
-              <p className="font-medium">{user.username}</p>
-              <p className="text-sm text-gray-600">Patient ID: {user.id.slice(0, 8)}</p>
+              <p className="font-medium">{user?.username}</p>
+              <p className="text-sm text-gray-600">
+                Patient ID: {user?.id.slice(0, 8)}
+              </p>
             </div>
           </div>
 
@@ -274,7 +292,7 @@ export default function Dashboard() {
         <div className="flex-1 p-6">{renderContent()}</div>
       </div>
       <div className="fixed bottom-6 right-6 z-50">
-        <Chatbot />
+        <Chatbot healthData={healthData} />
       </div>
     </div>
   );

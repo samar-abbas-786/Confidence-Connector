@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import { X, MessageCircle, Send, Bot, User } from "lucide-react";
 
-export default function Chatbot() {
+export default function Chatbot({ healthData }) {
   const [show, setShow] = useState(false);
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
@@ -25,10 +25,10 @@ export default function Chatbot() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           message,
-          heartRate: 85,
-          ecgStatus: "Normal",
-          spo2: 96,
-          temperature: 36.7,
+          heartRate: healthData?.heartRate,
+          ecg:healthData?.ecg,
+          spo2: healthData?.spo2,
+          temperature: healthData?.bodyTemp,
           gsr: 7,
         }),
       });
