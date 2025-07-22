@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   PieChart,
   Pie,
@@ -13,38 +13,59 @@ import {
 } from "recharts";
 import Navbar from "@/components/Navbar/page";
 
-const dummyHealthData = {
-  spo2: 96,
-  heartRate: 85,
-  bodyTemp: 36.7,
-  bloodPressure: "120/80",
-  ecg: "Normal",
-  lastUpdated: "Just now",
-};
-
-const dummyUserDetails = {
-  name: "Samar Abbas",
-  patientId: "HC-2024-001",
-  status: "Healthy",
-};
-
-const weeklyTrends = [
-  { day: "Mon", heartRate: 82, spo2: 97 },
-  { day: "Tue", heartRate: 78, spo2: 96 },
-  { day: "Wed", heartRate: 85, spo2: 95 },
-  { day: "Thu", heartRate: 80, spo2: 98 },
-  { day: "Fri", heartRate: 83, spo2: 96 },
-  { day: "Sat", heartRate: 79, spo2: 97 },
-  { day: "Sun", heartRate: 85, spo2: 96 },
-];
-
-const healthStatusData = [
-  { name: "Excellent", value: 2, color: "#10B981" },
-  { name: "Good", value: 1, color: "#3B82F6" },
-];
-
 export default function Dashboard() {
-  const [activeTab, setActiveTab] = useState("dashboard");
+  const [activeTab, setActiveTab] = useState("vitals");
+  const [user, setUser] = useState(null);
+  const [healthData, setHealthData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  const weeklyTrends = [
+    { day: "Mon", heartRate: 82, spo2: 97 },
+    { day: "Tue", heartRate: 78, spo2: 96 },
+    { day: "Wed", heartRate: 85, spo2: 95 },
+    { day: "Thu", heartRate: 80, spo2: 98 },
+    { day: "Fri", heartRate: 83, spo2: 96 },
+    { day: "Sat", heartRate: 79, spo2: 97 },
+    { day: "Sun", heartRate: 85, spo2: 96 },
+  ];
+
+  const healthStatusData = [
+    { name: "Excellent", value: 2, color: "#10B981" },
+    { name: "Good", value: 1, color: "#3B82F6" },
+  ];
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const storedUser = JSON.parse(localStorage.getItem("user"));
+        const token = localStorage.getItem("token");
+
+        if (!storedUser || !token) return;
+
+        setUser(storedUser);
+
+        const res = await fetch(`/api/health/${storedUser.id}`);
+        const json = await res.json();
+        if (json.success) {
+          setHealthData(json.data);
+        }
+      } catch (err) {
+        console.error("Failed to load data:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading || !healthData) {
+    return (
+      <div className="min-h-screen flex justify-center items-center text-gray-600">
+        Loading dashboard...
+      </div>
+    );
+  }
 
   const MetricCard = ({ title, value, unit, status }) => {
     const statusColors = {
@@ -80,35 +101,17 @@ export default function Dashboard() {
               <div>
                 <h3 className="text-lg font-semibold mb-3">Personal Info</h3>
                 <div className="space-y-4">
-                  <p>
-                    <span className="font-medium">Name:</span>{" "}
-                    {dummyUserDetails.name}
-                  </p>
-                  <p>
-                    <span className="font-medium">Patient ID:</span>{" "}
-                    {dummyUserDetails.patientId}
-                  </p>
-                  <p>
-                    <span className="font-medium">Status:</span>{" "}
-                    {dummyUserDetails.status}
-                  </p>
+                  <p><span className="font-medium">Name:</span> {user.username}</p>
+                  <p><span className="font-medium">Email:</span> {user.email || "N/A"}</p>
+                  <p><span className="font-medium">Status:</span> Active</p>
                 </div>
               </div>
               <div>
                 <h3 className="text-lg font-semibold mb-3">Health Stats</h3>
                 <div className="space-y-4">
-                  <p>
-                    <span className="font-medium">Last Update:</span>{" "}
-                    {dummyHealthData.lastUpdated}
-                  </p>
-                  <p>
-                    <span className="font-medium">ECG:</span>{" "}
-                    {dummyHealthData.ecg}
-                  </p>
-                  <p>
-                    <span className="font-medium">Blood Pressure:</span>{" "}
-                    {dummyHealthData.bloodPressure}
-                  </p>
+                  <p><span className="font-medium">ECG:</span> {healthData.ecg ?? "N/A"}</p>
+                  <p><span className="font-medium">SpO₂:</span> {healthData.spo2 ?? "N/A"}%</p>
+                  <p><span className="font-medium">Body Temp:</span> {healthData.bodyTemp ?? "N/A"} °C</p>
                 </div>
               </div>
             </div>
@@ -144,36 +147,36 @@ export default function Dashboard() {
           <div className="space-y-6">
             <div className="bg-blue-600 text-white p-6 rounded-lg">
               <h1 className="text-2xl font-bold">
-                Welcome back, {dummyUserDetails.name.split(" ")[0]}!
+                Welcome back, {user.username.split(" ")[0]}!
               </h1>
               <p className="mt-2">
                 Your health metrics are looking good today.
               </p>
             </div>
-
+          
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               <MetricCard
                 title="SpO₂ Level"
-                value={dummyHealthData.spo2}
+                value={healthData.spo2 ?? "N/A"}
                 unit="%"
                 status="excellent"
               />
               <MetricCard
                 title="Heart Rate"
-                value={dummyHealthData.heartRate}
+                value={healthData.heartRate ?? "N/A"}
                 unit="bpm"
                 status="good"
               />
               <MetricCard
                 title="Body Temp"
-                value={dummyHealthData.bodyTemp}
+                value={healthData.bodyTemp ?? "N/A"}
                 unit="°C"
                 status="normal"
               />
               <MetricCard
-                title="Blood Pressure"
-                value={dummyHealthData.bloodPressure}
-                status="good"
+                title="ECG"
+                value={healthData.ecg ?? "N/A"}
+                status="normal"
               />
             </div>
 
@@ -233,22 +236,19 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
-
       <div className="flex">
         {/* Sidebar */}
         <div className="w-64 bg-white border-r border-gray-200 p-4">
           <div className="flex items-center space-x-3 mb-8 p-2 bg-blue-50 rounded-lg">
             <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold">
-              {dummyUserDetails.name
+              {user.username
                 .split(" ")
                 .map((n) => n[0])
                 .join("")}
             </div>
             <div>
-              <p className="font-medium">{dummyUserDetails.name}</p>
-              <p className="text-sm text-gray-600">
-                {dummyUserDetails.patientId}
-              </p>
+              <p className="font-medium">{user.username}</p>
+              <p className="text-sm text-gray-600">Patient ID: {user.id.slice(0, 8)}</p>
             </div>
           </div>
 
