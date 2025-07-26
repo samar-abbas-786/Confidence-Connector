@@ -20,6 +20,21 @@ export default function Dashboard() {
   const [healthData, setHealthData] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // Dummy data definitions
+  const dummyUser = {
+    id: "user-12345",
+    username: "John Doe",
+    email: "john.doe@example.com",
+  };
+
+  const dummyHealthData = {
+    spo2: 98,
+    heartRate: 72,
+    bodyTemp: 36.6,
+    ecg: "Normal",
+    lastUpdated: new Date().toISOString(),
+  };
+
   const weeklyTrends = [
     { day: "Mon", heartRate: 82, spo2: 97 },
     { day: "Tue", heartRate: 78, spo2: 96 },
@@ -38,20 +53,34 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const storedUser = JSON.parse(localStorage.getItem("user"));
+        // Try to get user from localStorage
+        const storedUser =
+          JSON.parse(localStorage.getItem("user")) || dummyUser;
         const token = localStorage.getItem("token");
-
-        if (!storedUser || !token) return;
 
         setUser(storedUser);
 
-        const res = await fetch(`/api/health/${storedUser.id}`);
-        const json = await res.json();
-        if (json.success) {
-          setHealthData(json.data);
+        // Try to fetch health data
+        try {
+          const res = await fetch(`/api/health/${storedUser.id}`);
+          if (res.ok) {
+            const json = await res.json();
+            if (json.success) {
+              setHealthData(json.data);
+              return;
+            }
+          }
+        } catch (err) {
+          console.error("API fetch failed, using dummy data:", err);
         }
+
+        // If API fails, use dummy data
+        setHealthData(dummyHealthData);
       } catch (err) {
-        console.error("Failed to load data:", err);
+        console.error("Data loading error:", err);
+        // Fallback to dummy data
+        setUser(dummyUser);
+        setHealthData(dummyHealthData);
       } finally {
         setLoading(false);
       }
@@ -59,14 +88,6 @@ export default function Dashboard() {
 
     fetchData();
   }, []);
-
-  // if (loading || !healthData) {
-  //   return (
-  //     <div className="min-h-screen flex justify-center items-center text-gray-600">
-  //       Loading dashboard...
-  //     </div>
-  //   );
-  // }
 
   const MetricCard = ({ title, value, unit, status }) => {
     const statusColors = {
@@ -106,8 +127,7 @@ export default function Dashboard() {
                     <span className="font-medium">Name:</span> {user?.username}
                   </p>
                   <p>
-                    <span className="font-medium">Email:</span>{" "}
-                    {user?.email || "N/A"}
+                    <span className="font-medium">Email:</span> {user?.email}
                   </p>
                   <p>
                     <span className="font-medium">Status:</span> Active
@@ -118,16 +138,15 @@ export default function Dashboard() {
                 <h3 className="text-lg font-semibold mb-3">Health Stats</h3>
                 <div className="space-y-4">
                   <p>
-                    <span className="font-medium">ECG:</span>{" "}
-                    {healthData?.ecg ?? "N/A"}
+                    <span className="font-medium">ECG:</span> {healthData?.ecg}
                   </p>
                   <p>
                     <span className="font-medium">SpO₂:</span>{" "}
-                    {healthData?.spo2 ?? "N/A"}%
+                    {healthData?.spo2}%
                   </p>
                   <p>
                     <span className="font-medium">Body Temp:</span>{" "}
-                    {healthData?.bodyTemp ?? "N/A"} °C
+                    {healthData?.bodyTemp} °C
                   </p>
                 </div>
               </div>
@@ -167,34 +186,34 @@ export default function Dashboard() {
                 Welcome back, {user?.username.split(" ")[0]}!
               </h1>
               <p className="mt-2">
-                Your health metrics are looking good today.
+                {healthData?.lastUpdated
+                  ? `Last updated: ${new Date(
+                      healthData.lastUpdated
+                    ).toLocaleString()}`
+                  : "Your health metrics are looking good today."}
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               <MetricCard
                 title="SpO₂ Level"
-                value={healthData?.spo2 ?? "N/A"}
+                value={healthData?.spo2}
                 unit="%"
                 status="excellent"
               />
               <MetricCard
                 title="Heart Rate"
-                value={healthData?.heartRate ?? "N/A"}
+                value={healthData?.heartRate}
                 unit="bpm"
                 status="good"
               />
               <MetricCard
                 title="Body Temp"
-                value={healthData?.bodyTemp ?? "N/A"}
+                value={healthData?.bodyTemp}
                 unit="°C"
                 status="normal"
               />
-              <MetricCard
-                title="ECG"
-                value={healthData?.ecg ?? "N/A"}
-                status="normal"
-              />
+              <MetricCard title="ECG" value={healthData?.ecg} status="normal" />
             </div>
 
             <div className="grid md:grid-cols-2 gap-6">
@@ -249,6 +268,14 @@ export default function Dashboard() {
     { id: "profile", label: "Profile" },
     { id: "analytics", label: "Analytics" },
   ];
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex justify-center items-center text-gray-600">
+        Loading dashboard...
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
