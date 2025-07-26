@@ -22,9 +22,9 @@ export default function Dashboard() {
 
   // Dummy data definitions
   const dummyUser = {
-    id: "user-12345",
-    username: "John Doe",
-    email: "john.doe@example.com",
+    id: "samar-12345",
+    username: "Samar Abbas",
+    email: "samar.abbas@example.com",
   };
 
   const dummyHealthData = {
