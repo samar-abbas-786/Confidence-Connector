@@ -50,7 +50,7 @@ export default function Dashboard() {
         if (json.success && json.data) {
           setHealthData(json.data);
         } else {
-          setHealthData(null); // No data found
+          setHealthData(null);
         }
       } catch (err) {
         console.error("Failed to load health data:", err);
@@ -140,6 +140,10 @@ export default function Dashboard() {
                     <span className="font-medium">Body Temp:</span>{" "}
                     {healthData?.bodyTemp ?? "N/A"} °C
                   </p>
+                  <p>
+                    <span className="font-medium">GSR:</span>{" "}
+                    {healthData?.gsr ?? "N/A"}
+                  </p>
                 </div>
               </div>
             </div>
@@ -182,7 +186,7 @@ export default function Dashboard() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
               <MetricCard
                 title="SpO₂ Level"
                 value={healthData?.spo2}
@@ -202,6 +206,7 @@ export default function Dashboard() {
                 status="normal"
               />
               <MetricCard title="ECG" value={healthData?.ecg} status="normal" />
+              <MetricCard title="GSR" value={healthData?.gsr} status="normal" />
             </div>
 
             <div className="grid md:grid-cols-2 gap-6">
@@ -261,7 +266,6 @@ export default function Dashboard() {
     <div className="min-h-screen bg-gray-50">
       <Navbar />
       <div className="flex">
-        {/* Sidebar */}
         <div className="w-64 bg-white border-r border-gray-200 p-4">
           <div className="flex items-center space-x-3 mb-8 p-2 bg-blue-50 rounded-lg">
             <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold">
@@ -295,7 +299,6 @@ export default function Dashboard() {
           </nav>
         </div>
 
-        {/* Main Content */}
         <div className="flex-1 p-6">{renderContent()}</div>
       </div>
     </div>
