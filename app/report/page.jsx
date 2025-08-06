@@ -12,6 +12,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import Navbar from "@/components/Navbar/page";
+import Chatbot from "@/components/Chatbot/page";
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("vitals");
@@ -263,7 +264,7 @@ export default function Dashboard() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 relative">
       <Navbar />
       <div className="flex">
         <div className="w-64 bg-white border-r border-gray-200 p-4">
@@ -301,6 +302,9 @@ export default function Dashboard() {
 
         <div className="flex-1 p-6">{renderContent()}</div>
       </div>
+
+      {/* 🧠 Chatbot Button and Panel */}
+      <Chatbot />
     </div>
   );
 }
