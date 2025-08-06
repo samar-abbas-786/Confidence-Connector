@@ -24,6 +24,11 @@ export default function Register() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),
     });
+    const data = await res.json();
+    if (data) {
+      localStorage.setItem("user", JOSN.stringify(data.newUser));
+    }
+    console.log("data", data);
 
     if (res.ok) router.push("/login");
     else alert("Registration failed");
@@ -53,25 +58,53 @@ export default function Register() {
               />
             </svg>
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Create Account</h1>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            Create Account
+          </h1>
           <p className="text-gray-600">
-            Join our <span className="text-indigo-600">confidence connector</span> platform today
+            Join our{" "}
+            <span className="text-indigo-600">confidence connector</span>{" "}
+            platform today
           </p>
         </div>
 
         {/* Form Card */}
         <div className="bg-white rounded-3xl shadow-2xl p-8 border border-gray-100 backdrop-blur-sm space-y-6">
           {/* Username */}
-          <Input label="Username" name="username" value={form.username} onChange={handleChange} />
+          <Input
+            label="Username"
+            name="username"
+            value={form.username}
+            onChange={handleChange}
+          />
           {/* Email */}
-          <Input label="Email" name="email" type="email" value={form.email} onChange={handleChange} />
+          <Input
+            label="Email"
+            name="email"
+            type="email"
+            value={form.email}
+            onChange={handleChange}
+          />
           {/* Phone */}
-          <Input label="Phone" name="phone" value={form.phone} onChange={handleChange} />
+          <Input
+            label="Phone"
+            name="phone"
+            value={form.phone}
+            onChange={handleChange}
+          />
           {/* Age */}
-          <Input label="Age" name="age" type="number" value={form.age} onChange={handleChange} />
+          <Input
+            label="Age"
+            name="age"
+            type="number"
+            value={form.age}
+            onChange={handleChange}
+          />
           {/* Gender */}
           <div className="mb-4">
-            <label className="block text-sm font-semibold text-gray-700 mb-2">Gender</label>
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
+              Gender
+            </label>
             <select
               name="gender"
               value={form.gender}
@@ -95,7 +128,9 @@ export default function Register() {
 
           {/* Role Selection */}
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">Account Type</label>
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
+              Account Type
+            </label>
             <div className="grid grid-cols-2 gap-3">
               {["doctor", "patient"].map((r) => (
                 <button
@@ -184,7 +219,9 @@ export default function Register() {
 function Input({ label, name, type = "text", value, onChange }) {
   return (
     <div>
-      <label className="block text-sm font-semibold text-gray-700 mb-2">{label}</label>
+      <label className="block text-sm font-semibold text-gray-700 mb-2">
+        {label}
+      </label>
       <input
         type={type}
         name={name}
