@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 import {
   Heart,
   Activity,
@@ -27,13 +27,19 @@ import { useRouter } from "next/navigation";
 const Navbar = () => {
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [user, setUser] = useState();
+  useEffect(() => {
+    const userData = JSON.parse(localStorage.getItem("user")) || "";
+    setUser(userData);
+    console.log("user", user);
+  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
   const goToRegister = () => {
-    router.push("/register");
+    user ? router.push("/report") : router.push("/register");
   };
 
   return (
