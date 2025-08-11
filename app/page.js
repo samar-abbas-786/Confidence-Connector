@@ -2,7 +2,7 @@
 
 import Navbar from "@/components/Navbar/page";
 import Hero from "@/components/Hero/page";
-import AboutUs from "@/components/About/page";
+import About from "@/components/About/page";
 import Features from "@/components/Features/page";
 import Team from "@/components/Team/page";
 import Mentors from "@/components/Mentors/page";
@@ -21,7 +21,7 @@ const SmartHealthcareUI = () => {
       {/* Hero Section */}
       <Hero />
       {/* About Section */}
-      <AboutUs />
+      <About />
       {/* Features Section */}
       <Features />
 

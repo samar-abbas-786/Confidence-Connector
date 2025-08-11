@@ -31,7 +31,7 @@ const RevealScroll = ({ children, delay = 0.25 }) => {
         },
       }}
       transition={{
-        duration: 0.6,
+        duration: 0.2,
         delay: delay,
         ease: [0.25, 0.8, 0.25, 1],
         type: "spring",

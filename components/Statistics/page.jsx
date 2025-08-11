@@ -1,4 +1,4 @@
-import { useView } from "@/context/viewContext";
+import { useView } from "../../context/viewContext";
 import CountUp from "react-countup";
 const Statistics = () => {
   const { ref, isView } = useView();

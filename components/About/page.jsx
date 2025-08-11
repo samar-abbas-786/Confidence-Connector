@@ -2,7 +2,7 @@
 import { X, Activity, Brain, Shield } from "lucide-react";
 import RevealScroll from "../Reveal"; // Optional if you're using animation
 
-const AboutUs = () => {
+const About = () => {
   return (
     <section id="about" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -77,4 +77,4 @@ const AboutUs = () => {
   );
 };
 
-export default AboutUs;
+export default About;

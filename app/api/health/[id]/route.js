@@ -17,6 +17,9 @@ export async function GET(req, { params }) {
     return NextResponse.json({ success: true, data: healthData });
   } catch (error) {
     console.error("GET /api/health/[id] error:", error);
-    return NextResponse.json({ success: false, error: "Internal Server Error" }, { status: 500 });
+    return NextResponse.json(
+      { success: false, error: "Internal Server Error" },
+      { status: 500 }
+    );
   }
 }
