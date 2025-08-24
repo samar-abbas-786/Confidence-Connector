@@ -13,12 +13,14 @@ import {
 } from "recharts";
 import Navbar from "@/components/Navbar/page";
 import Chatbot from "@/components/Chatbot/page";
+import { Menu, X } from "lucide-react";
 
-export default function Dashboard() {
+export default function Report() {
   const [activeTab, setActiveTab] = useState("vitals");
   const [user, setUser] = useState(null);
   const [healthData, setHealthData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const weeklyTrends = [
     { day: "Mon", heartRate: 82, spo2: 97 },
@@ -67,7 +69,7 @@ export default function Dashboard() {
   if (loading) {
     return (
       <div className="min-h-screen flex justify-center items-center text-gray-600">
-        Loading dashboard...
+        Loading report...
       </div>
     );
   }
@@ -82,10 +84,10 @@ export default function Dashboard() {
     };
 
     return (
-      <div className="bg-white p-4 rounded-lg shadow border border-gray-200">
-        <h3 className="text-sm font-medium text-gray-600">{title}</h3>
-        <div className="flex items-end mt-2">
-          <span className="text-2xl font-bold">
+      <div className="bg-white/80 backdrop-blur-sm p-5 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 hover:scale-105">
+        <h3 className="text-sm font-semibold text-gray-600">{title}</h3>
+        <div className="flex items-end mt-3">
+          <span className="text-3xl font-bold">
             {value !== undefined && value !== null ? value : "N/A"}
           </span>
           {unit && value !== undefined && value !== null && (
@@ -93,9 +95,7 @@ export default function Dashboard() {
           )}
         </div>
         <div
-          className={`mt-2 px-2 py-1 rounded-full text-xs w-fit ${
-            statusColors[status || "unknown"]
-          }`}
+          className={`mt-3 px-3 py-1 rounded-full text-xs font-medium w-fit ${statusColors[status || "unknown"]}`}
         >
           {status || "unknown"}
         </div>
@@ -108,7 +108,7 @@ export default function Dashboard() {
       case "profile":
         return (
           <div className="bg-white p-6 rounded-lg shadow border border-gray-200">
-            <h2 className="text-2xl font-bold mb-4">User Profile</h2>
+            <h2 className="text-2xl font-bold mb-6">User Profile</h2>
             <div className="grid md:grid-cols-2 gap-6">
               <div>
                 <h3 className="text-lg font-semibold mb-3">Personal Info</h3>
@@ -155,7 +155,7 @@ export default function Dashboard() {
         return (
           <div className="space-y-6">
             <h2 className="text-2xl font-bold">Health Analytics</h2>
-            <div className="bg-white p-6 rounded-lg shadow border border-gray-200">
+            <div className="bg-white p-6 rounded-xl shadow-md border border-gray-100">
               <h3 className="text-lg font-semibold mb-4">Weekly Heart Rate</h3>
               <div className="h-64">
                 <ResponsiveContainer width="100%" height="100%">
@@ -166,7 +166,8 @@ export default function Dashboard() {
                       type="monotone"
                       dataKey="heartRate"
                       stroke="#3B82F6"
-                      strokeWidth={2}
+                      strokeWidth={3}
+                      dot={{ r: 5 }}
                     />
                   </LineChart>
                 </ResponsiveContainer>
@@ -178,15 +179,17 @@ export default function Dashboard() {
       default:
         return (
           <div className="space-y-6">
-            <div className="bg-blue-600 text-white p-6 rounded-lg">
+            {/* Welcome Banner */}
+            <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-6 rounded-xl shadow-md">
               <h1 className="text-2xl font-bold">
                 Welcome back, {user?.username?.split(" ")[0] ?? "User"}!
               </h1>
-              <p className="mt-2">
+              {/* <p className="mt-2 text-white/80">
                 Your health metrics are looking good today.
-              </p>
+              </p> */}
             </div>
 
+            {/* Metric Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
               <MetricCard
                 title="SpO₂ Level"
@@ -210,8 +213,9 @@ export default function Dashboard() {
               <MetricCard title="GSR" value={healthData?.gsr} status="normal" />
             </div>
 
+            {/* Charts Section */}
             <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-white p-6 rounded-lg shadow border border-gray-200">
+              <div className="bg-white p-6 rounded-xl shadow-md border border-gray-100">
                 <h3 className="text-lg font-semibold mb-4">Health Status</h3>
                 <div className="h-64">
                   <ResponsiveContainer width="100%" height="100%">
@@ -234,7 +238,7 @@ export default function Dashboard() {
                 </div>
               </div>
 
-              <div className="bg-white p-6 rounded-lg shadow border border-gray-200">
+              <div className="bg-white p-6 rounded-xl shadow-md border border-gray-100">
                 <h3 className="text-lg font-semibold mb-4">Weekly Trends</h3>
                 <div className="h-64">
                   <ResponsiveContainer width="100%" height="100%">
@@ -245,7 +249,8 @@ export default function Dashboard() {
                         type="monotone"
                         dataKey="spo2"
                         stroke="#10B981"
-                        strokeWidth={2}
+                        strokeWidth={3}
+                        dot={{ r: 5 }}
                       />
                     </LineChart>
                   </ResponsiveContainer>
@@ -267,40 +272,67 @@ export default function Dashboard() {
     <div className="min-h-screen bg-gray-50 relative">
       <Navbar />
       <div className="flex">
-        <div className="w-64 bg-white border-r border-gray-200 p-4">
-          <div className="flex items-center space-x-3 mb-8 p-2 bg-blue-50 rounded-lg">
-            <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold">
-              {user?.username
-                ?.split(" ")
-                .map((n) => n[0])
-                .join("")}
-            </div>
-            <div>
-              <p className="font-medium">{user?.username ?? "User"}</p>
-              <p className="text-sm text-gray-600">
-                Patient ID: {user?.id?.slice(0, 8) ?? "N/A"}
-              </p>
-            </div>
-          </div>
+        {/* Sidebar */}
+        <div
+          className={`fixed md:static z-40 top-0 left-0 h-full bg-white shadow-md border-r border-gray-200 transform ${
+            sidebarOpen ? "translate-x-0" : "-translate-x-full"
+          } md:translate-x-0 transition-transform duration-300 w-64`}
+        >
+          <div className="p-4 relative">
+            {/* Close button for mobile */}
+            <button
+              className="absolute top-4 right-4 md:hidden text-gray-600 hover:text-red-500"
+              onClick={() => setSidebarOpen(false)}
+            >
+              <X className="w-6 h-6" />
+            </button>
 
-          <nav className="space-y-2">
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`w-full text-left p-3 rounded-lg transition-colors ${
-                  activeTab === tab.id
-                    ? "bg-blue-100 text-blue-700 font-medium"
-                    : "hover:bg-gray-100"
-                }`}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </nav>
+            <div className="flex items-center space-x-3 mb-8 p-3 bg-blue-50 rounded-lg">
+              <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold">
+                {user?.username
+                  ?.split(" ")
+                  .map((n) => n[0])
+                  .join("")}
+              </div>
+              <div>
+                <p className="font-semibold">{user?.username ?? "User"}</p>
+                <p className="text-xs text-gray-600">
+                  ID: {user?.id?.slice(0, 8) ?? "N/A"}
+                </p>
+              </div>
+            </div>
+
+            <nav className="space-y-2">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => {
+                    setActiveTab(tab.id);
+                    setSidebarOpen(false);
+                  }}
+                  className={`w-full text-left px-4 py-3 rounded-lg transition-all duration-300 ${
+                    activeTab === tab.id
+                      ? "bg-blue-100 text-blue-700 font-semibold"
+                      : "hover:bg-gray-100"
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </nav>
+          </div>
         </div>
 
-        <div className="flex-1 p-6">{renderContent()}</div>
+        {/* Mobile Menu Button */}
+        <button
+          className="absolute md:hidden top-24 left-4 bg-blue-600 text-white p-3 rounded-full shadow-md hover:bg-blue-700 transition"
+          onClick={() => setSidebarOpen(true)}
+        >
+          <Menu className="w-6 h-6" />
+        </button>
+
+        {/* Main Content */}
+        <div className="flex-1 p-6 md:ml-0 ml-0">{renderContent()}</div>
       </div>
 
       <Chatbot />

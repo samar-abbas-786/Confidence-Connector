@@ -25,11 +25,8 @@ export default function Login() {
       const data = await res.json();
 
       if (res.ok) {
-        // Save token and user to localStorage
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", JSON.stringify(data.user));
-
-        // Redirect to dashboard
         router.push("/report");
       } else {
         setError(data.message || "Login failed");
@@ -130,19 +127,10 @@ export default function Login() {
           </div>
 
           {/* Password */}
-          <div className="mb-6">
-            <div className="flex items-center justify-between mb-2">
-              <label className="block text-sm font-semibold text-gray-700">
-                Password
-              </label>
-              <button
-                type="button"
-                className="text-sm text-blue-600 hover:text-blue-700 font-medium transition-colors"
-                onClick={() => console.log("Forgot password clicked")}
-              >
-                Forgot password?
-              </button>
-            </div>
+          <div className="mb-8">
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
+              Password
+            </label>
             <div className="relative">
               <input
                 type="password"
@@ -169,21 +157,6 @@ export default function Login() {
                 </svg>
               </div>
             </div>
-          </div>
-
-          {/* Remember Me */}
-          <div className="mb-8 flex items-center">
-            <input
-              type="checkbox"
-              id="remember"
-              className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-            />
-            <label
-              htmlFor="remember"
-              className="ml-2 block text-sm text-gray-700"
-            >
-              Remember me for 30 days
-            </label>
           </div>
 
           {/* Submit */}

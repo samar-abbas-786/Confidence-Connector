@@ -16,22 +16,36 @@ export default function Register() {
     gender: "male",
   });
 
+  const [loading, setLoading] = useState(false);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
-    const res = await fetch("/api/auth/signup", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
-    });
-    const data = await res.json();
-    if (data) {
-      localStorage.setItem("user", JOSN.stringify(data.newUser));
+    try {
+      const res = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      const data = await res.json();
+
+      if (data) {
+        localStorage.setItem("user", JSON.stringify(data.newUser));
+      }
+
+      if (res.ok) {
+        router.push("/login");
+      } else {
+        alert(data.message || "Registration failed");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong");
+    } finally {
+      setLoading(false);
     }
-    console.log("data", data);
-
-    if (res.ok) router.push("/login");
-    else alert("Registration failed");
   };
 
   const handleChange = (e) => {
@@ -69,30 +83,32 @@ export default function Register() {
         </div>
 
         {/* Form Card */}
-        <div className="bg-white rounded-3xl shadow-2xl p-8 border border-gray-100 backdrop-blur-sm space-y-6">
-          {/* Username */}
+        <form
+          onSubmit={handleSubmit}
+          className="bg-white rounded-3xl shadow-2xl p-8 border border-gray-100 backdrop-blur-sm space-y-6"
+        >
           <Input
             label="Username"
             name="username"
             value={form.username}
             onChange={handleChange}
+            required
           />
-          {/* Email */}
           <Input
             label="Email"
             name="email"
             type="email"
             value={form.email}
             onChange={handleChange}
+            required
           />
-          {/* Phone */}
           <Input
             label="Phone"
             name="phone"
             value={form.phone}
             onChange={handleChange}
+            required
           />
-          {/* Age */}
           <Input
             label="Age"
             name="age"
@@ -100,6 +116,7 @@ export default function Register() {
             value={form.age}
             onChange={handleChange}
           />
+
           {/* Gender */}
           <div className="mb-4">
             <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -117,13 +134,13 @@ export default function Register() {
             </select>
           </div>
 
-          {/* Password */}
           <Input
             label="Password"
             name="password"
             type="password"
             value={form.password}
             onChange={handleChange}
+            required
           />
 
           {/* Role Selection */}
@@ -131,38 +148,36 @@ export default function Register() {
             <label className="block text-sm font-semibold text-gray-700 mb-2">
               Account Type
             </label>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-2">
               {["doctor", "patient"].map((r) => (
                 <button
                   key={r}
                   type="button"
                   onClick={() => setForm({ ...form, role: r })}
-                  className={`p-4 rounded-xl border-2 transition-all duration-300 ${
+                  className={`p-4 rounded-xl border-2 transition-all duration-300 flex flex-col items-center ${
                     form.role === r
                       ? "border-blue-500 bg-blue-50 text-blue-700"
                       : "border-gray-200 bg-gray-50 text-gray-700 hover:border-gray-300"
                   }`}
                 >
-                  <div className="flex flex-col items-center">
-                    <svg
-                      className="w-6 h-6 mb-2"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d={
-                          r === "doctor"
-                            ? "M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 7.172V5L8 4z"
-                            : "M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                        }
-                      />
-                    </svg>
-                    <span className="text-sm font-medium capitalize">{r}</span>
-                  </div>
+                  <svg
+                    className="w-6 h-6 mb-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d={
+                        r === "doctor"
+                          ? "M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 7.172V5L8 4z"
+                          : "M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                      }
+                    />
+                  </svg>
+                  <span className="text-sm font-medium capitalize">{r}</span>
                 </button>
               ))}
             </div>
@@ -171,13 +186,14 @@ export default function Register() {
           {/* Submit Button */}
           <button
             type="submit"
-            onClick={handleSubmit}
-            className="w-full py-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-blue-200"
+            disabled={loading}
+            className={`w-full py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-blue-200 ${
+              loading ? "opacity-70 cursor-not-allowed" : ""
+            }`}
           >
-            Create Account
+            {loading ? "Creating Account..." : "Create Account"}
           </button>
 
-          {/* Footer */}
           <div className="text-center">
             <p className="text-sm text-gray-600">
               Already have an account?{" "}
@@ -189,7 +205,7 @@ export default function Register() {
               </Link>
             </p>
           </div>
-        </div>
+        </form>
 
         {/* Security Note */}
         <div className="mt-6 text-center">
@@ -215,8 +231,8 @@ export default function Register() {
   );
 }
 
-// Reusable input field
-function Input({ label, name, type = "text", value, onChange }) {
+// Reusable input component
+function Input({ label, name, type = "text", value, onChange, required }) {
   return (
     <div>
       <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -228,6 +244,7 @@ function Input({ label, name, type = "text", value, onChange }) {
         value={value}
         onChange={onChange}
         placeholder={`Enter your ${label.toLowerCase()}`}
+        required={required}
         className="w-full p-4 rounded-xl bg-gray-50 border-2 border-gray-200 text-gray-900 placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:bg-white transition-all duration-300 hover:border-gray-300"
       />
     </div>
