@@ -64,7 +64,7 @@ export default function VoiceConsultationSystem() {
             ...prev,
             {
               id: Date.now() + Math.random(),
-              speaker: "Doctor",
+              // speaker: "Doctor",
               text: finalTranscript.trim(),
               timestamp,
             },
@@ -153,7 +153,7 @@ export default function VoiceConsultationSystem() {
         ...prev,
         {
           id: Date.now() + Math.random(),
-          speaker: "Doctor",
+          // speaker: "Doctor",
           text: interimTranscript,
           timestamp,
         },
@@ -252,7 +252,7 @@ ${aiAnalysis.summary}
 
 
 FULL TRANSCRIPT:
-${transcript.map((t) => `[${t.timestamp}] ${t.speaker}: ${t.text}`).join("\n")}
+${transcript.map((t) => `[${t.timestamp}] : ${t.text}`).join("\n")}
 `;
 
     const blob = new Blob([reportContent], { type: "text/plain" });
@@ -400,24 +400,8 @@ ${transcript.map((t) => `[${t.timestamp}] ${t.speaker}: ${t.text}`).join("\n")}
                 <div className="space-y-3">
                   {transcript.map((item) => (
                     <div key={item.id} className="flex items-start space-x-3">
-                      <div
-                        className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
-                          item.speaker === "Doctor"
-                            ? "bg-blue-500"
-                            : "bg-green-500"
-                        }`}
-                      >
-                        {item.speaker === "Doctor" ? (
-                          <Stethoscope size={16} className="text-white" />
-                        ) : (
-                          <User size={16} className="text-white" />
-                        )}
-                      </div>
                       <div className="flex-1">
                         <div className="flex items-center space-x-2 mb-1">
-                          <span className="font-semibold text-gray-800">
-                            {item.speaker}
-                          </span>
                           <span className="text-xs text-gray-500">
                             {item.timestamp}
                           </span>
@@ -593,24 +577,8 @@ ${transcript.map((t) => `[${t.timestamp}] ${t.speaker}: ${t.text}`).join("\n")}
                           key={item.id}
                           className="flex items-start space-x-3"
                         >
-                          <div
-                            className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
-                              item.speaker === "Doctor"
-                                ? "bg-blue-500"
-                                : "bg-green-500"
-                            }`}
-                          >
-                            {item.speaker === "Doctor" ? (
-                              <Stethoscope size={16} className="text-white" />
-                            ) : (
-                              <User size={16} className="text-white" />
-                            )}
-                          </div>
                           <div className="flex-1">
                             <div className="flex items-center space-x-2 mb-1">
-                              <span className="font-semibold text-gray-800">
-                                {item.speaker}
-                              </span>
                               <span className="text-xs text-gray-500">
                                 {item.timestamp}
                               </span>
