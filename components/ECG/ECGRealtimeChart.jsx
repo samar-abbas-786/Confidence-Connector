@@ -1,15 +1,28 @@
 // components/ECG/ECGRealtimeChart.jsx
-'use client';
+"use client";
 
 import {
-  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
 } from "recharts";
 
-export default function ECGChart({ data, domainMV = [0, 3300], showMVAxis = true }) {
+export default function ECGChart({
+  data,
+  domainMV = [0, 3300],
+  showMVAxis = true,
+}) {
   return (
     <div className="w-full h-[360px] md:h-[420px]">
       <ResponsiveContainer width="100%" height="100%">
-        <LineChart data={data} margin={{ top: 8, right: 8, bottom: 8, left: 0 }}>
+        <LineChart
+          data={data}
+          margin={{ top: 8, right: 8, bottom: 8, left: 0 }}
+        >
           {/* Grid */}
           <CartesianGrid stroke="#1f2937" strokeDasharray="3 3" />
 
@@ -24,7 +37,12 @@ export default function ECGChart({ data, domainMV = [0, 3300], showMVAxis = true
               tick={{ fill: "#9ca3af", fontSize: 11 }}
               tickLine={{ stroke: "#374151" }}
               axisLine={{ stroke: "#374151" }}
-              label={{ value: "mV", angle: -90, position: "insideLeft", fill: "#9ca3af" }}
+              label={{
+                value: "mV",
+                angle: -90,
+                position: "insideLeft",
+                fill: "#9ca3af",
+              }}
             />
           ) : (
             <YAxis
@@ -33,7 +51,12 @@ export default function ECGChart({ data, domainMV = [0, 3300], showMVAxis = true
               tick={{ fill: "#9ca3af", fontSize: 11 }}
               tickLine={{ stroke: "#374151" }}
               axisLine={{ stroke: "#374151" }}
-              label={{ value: "ECG (V)", angle: -90, position: "insideLeft", fill: "#9ca3af" }}
+              label={{
+                value: "ECG (V)",
+                angle: -90,
+                position: "insideLeft",
+                fill: "#9ca3af",
+              }}
             />
           )}
 
@@ -42,7 +65,7 @@ export default function ECGChart({ data, domainMV = [0, 3300], showMVAxis = true
             contentStyle={{
               backgroundColor: "#0b0f14",
               border: "1px solid #1f2937",
-              color: "#f9fafb"
+              color: "#f9fafb",
             }}
             labelFormatter={(t) =>
               typeof t === "number" ? new Date(t).toLocaleTimeString() : t

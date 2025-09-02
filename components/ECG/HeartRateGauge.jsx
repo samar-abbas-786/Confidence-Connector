@@ -4,10 +4,13 @@ export default function HeartRateGauge({ bpm, status = "unknown" }) {
   const pct = typeof bpm === "number" ? (v - 30) / (180 - 30) : 0.0;
 
   const color =
-    status === "ok" ? "#22c55e" :       // green
-    status === "warning" ? "#f59e0b" : // yellow
-    status === "alert" ? "#ef4444" :   // red
-    "#6b7280";                         // gray
+    status === "ok"
+      ? "#22c55e" // green
+      : status === "warning"
+      ? "#f59e0b" // yellow
+      : status === "alert"
+      ? "#ef4444" // red
+      : "#6b7280"; // gray
 
   return (
     <div className="relative w-full h-32 sm:h-40 flex items-center justify-center">

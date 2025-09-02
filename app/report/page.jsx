@@ -20,11 +20,20 @@ import { exportCSV } from "@/utils/csv";
 // ========= ECG: dynamic components (SSR-safe) =========
 const ECGChart = dynamic(() => import("@/components/ECG/ECGRealtimeChart"), {
   ssr: false,
-  loading: () => <div className="h-[420px] bg-gray-100 animate-pulse rounded-xl" />,
+  loading: () => (
+    <div className="h-[420px] bg-gray-100 animate-pulse rounded-xl" />
+  ),
 });
-const HeartRateGauge = dynamic(() => import("@/components/ECG/HeartRateGauge"), { ssr: false });
-const StatusBadge = dynamic(() => import("@/components/ECG/StatusBadge"), { ssr: false });
-const Controls = dynamic(() => import("@/components/ECG/Controls"), { ssr: false });
+const HeartRateGauge = dynamic(
+  () => import("@/components/ECG/HeartRateGauge"),
+  { ssr: false }
+);
+const StatusBadge = dynamic(() => import("@/components/ECG/StatusBadge"), {
+  ssr: false,
+});
+const Controls = dynamic(() => import("@/components/ECG/Controls"), {
+  ssr: false,
+});
 
 // ========= ECG config =========
 const BUFFER_SECONDS = 12;
@@ -149,12 +158,17 @@ export default function Report() {
           const msg = JSON.parse(event.data);
           // Expecting: { ecg, mV, timestamp, heartRate, rawADC }
           if (typeof msg.mV === "number") setRealtimeMV(msg.mV);
-          if (typeof msg.heartRate === "number") setRealTimeBpm(Math.round(msg.heartRate));
+          if (typeof msg.heartRate === "number")
+            setRealTimeBpm(Math.round(msg.heartRate));
 
           const t = Date.now();
           setEcgPoints((prev) => {
-            const next = [...prev, { t, mV: msg.mV, ecg: msg.ecg, ts: msg.timestamp }];
-            if (next.length > MAX_POINTS) next.splice(0, next.length - MAX_POINTS);
+            const next = [
+              ...prev,
+              { t, mV: msg.mV, ecg: msg.ecg, ts: msg.timestamp },
+            ];
+            if (next.length > MAX_POINTS)
+              next.splice(0, next.length - MAX_POINTS);
             return next;
           });
 
@@ -212,7 +226,9 @@ export default function Report() {
   const downloadECGCSV = () => exportCSV(ecgPoints, "ecg_stream.csv");
   const handleSaveWs = (url) => {
     setWsUrl(url);
-    try { localStorage.setItem("ecgWsUrl", url); } catch {}
+    try {
+      localStorage.setItem("ecgWsUrl", url);
+    } catch {}
   };
 
   if (loading) {
@@ -244,7 +260,9 @@ export default function Report() {
           )}
         </div>
         <div
-          className={`mt-3 px-3 py-1 rounded-full text-xs font-medium w-fit ${statusColors[status || "unknown"]}`}
+          className={`mt-3 px-3 py-1 rounded-full text-xs font-medium w-fit ${
+            statusColors[status || "unknown"]
+          }`}
         >
           {status || "unknown"}
         </div>
@@ -254,7 +272,7 @@ export default function Report() {
 
   const renderContent = () => {
     switch (activeTab) {
-      // ======== NEW: Live ECG tab ========
+      // ======== Live ECG tab ========
       case "ecg":
         return (
           <div className="space-y-6">
@@ -263,7 +281,9 @@ export default function Report() {
                 <Activity className="w-8 h-8 text-red-500" />
                 <div>
                   <h2 className="text-2xl font-bold">Real-time ECG Monitor</h2>
-                  <p className="text-gray-600">Live cardiac monitoring from ESP32</p>
+                  <p className="text-gray-600">
+                    Live cardiac monitoring from ESP32
+                  </p>
                 </div>
               </div>
               <StatusBadge mode={ecgStatus} latencyMs={latencyMs} />
@@ -280,10 +300,10 @@ export default function Report() {
             {/* Main */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               {/* Chart */}
-              <div className="lg:col-span-2 bg-[#0f1720] border border-white/10 rounded-2xl p-4 md:p-5 shadow-xl">
+              <div className="lg:col-span-2 bg-white border border-gray-200 rounded-2xl p-4 md:p-5 shadow-md">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-lg font-semibold text-white">ECG Waveform</h3>
-                  <div className="text-sm text-gray-400">
+                  <h3 className="text-lg font-semibold">ECG Waveform</h3>
+                  <div className="text-sm text-gray-500">
                     Window: {BUFFER_SECONDS}s • {SAMPLE_HZ} Hz
                   </div>
                 </div>
@@ -292,18 +312,18 @@ export default function Report() {
 
               {/* Side panel */}
               <div className="space-y-4">
-                <div className="bg-[#0f1720] border border-white/10 rounded-2xl p-5 shadow-xl">
-                  <h4 className="font-semibold text-white mb-2">Live Vitals</h4>
+                <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-md">
+                  <h4 className="font-semibold mb-2">Live Vitals</h4>
                   <div className="grid grid-cols-2 gap-4">
-                    <div className="bg-black/30 rounded-xl p-4">
-                      <div className="text-xs text-gray-400">Heart Rate</div>
-                      <div className="text-2xl font-bold text-white mt-1">
+                    <div className="bg-gray-50 rounded-xl p-4">
+                      <div className="text-xs text-gray-500">Heart Rate</div>
+                      <div className="text-2xl font-bold mt-1">
                         {realTimeBpm != null ? `${realTimeBpm} BPM` : "--"}
                       </div>
                     </div>
-                    <div className="bg-black/30 rounded-xl p-4">
-                      <div className="text-xs text-gray-400">ECG (mV)</div>
-                      <div className="text-2xl font-bold text-white mt-1">
+                    <div className="bg-gray-50 rounded-xl p-4">
+                      <div className="text-xs text-gray-500">ECG (mV)</div>
+                      <div className="text-2xl font-bold mt-1">
                         {realtimeMV != null ? realtimeMV.toFixed(1) : "--"}
                       </div>
                     </div>
@@ -313,24 +333,48 @@ export default function Report() {
                   </div>
                 </div>
 
-                <div className="bg-[#0f1720] border border-white/10 rounded-2xl p-5 shadow-xl">
-                  <h4 className="font-semibold text-white mb-2">Connection Info</h4>
-                  <ul className="text-sm text-gray-300 space-y-1">
-                    <li>State: <span className="text-gray-100">{ecgStatus}</span></li>
-                    <li>Latency: <span className="text-gray-100">{latencyMs ?? "--"} ms</span></li>
-                    <li>Dropped bursts: <span className="text-gray-100">{dropped}</span></li>
-                    <li>Points buffered: <span className="text-gray-100">{ecgPoints.length}</span></li>
+                <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-md">
+                  <h4 className="font-semibold mb-2">Connection Info</h4>
+                  <ul className="text-sm text-gray-600 space-y-1">
+                    <li>
+                      State:{" "}
+                      <span className="font-medium text-gray-800">
+                        {ecgStatus}
+                      </span>
+                    </li>
+                    <li>
+                      Latency:{" "}
+                      <span className="font-medium text-gray-800">
+                        {latencyMs ?? "--"} ms
+                      </span>
+                    </li>
+                    <li>
+                      Dropped bursts:{" "}
+                      <span className="font-medium text-gray-800">
+                        {dropped}
+                      </span>
+                    </li>
+                    <li>
+                      Points buffered:{" "}
+                      <span className="font-medium text-gray-800">
+                        {ecgPoints.length}
+                      </span>
+                    </li>
                   </ul>
                 </div>
               </div>
             </div>
 
             <div className="text-xs text-gray-500 px-1">
-              Expected payload: {"{ ecg:Number, mV:Number, timestamp:Number, heartRate:Number, rawADC:Number }"}
+              Expected payload:{" "}
+              {
+                "{ ecg:Number, mV:Number, timestamp:Number, heartRate:Number, rawADC:Number }"
+              }
             </div>
           </div>
         );
 
+      // ======== User Profile tab ========
       case "profile":
         return (
           <div className="bg-white p-6 rounded-lg shadow border border-gray-200">
@@ -377,6 +421,7 @@ export default function Report() {
           </div>
         );
 
+      // ======== Analytics tab ========
       case "analytics":
         return (
           <div className="space-y-6">
@@ -402,6 +447,7 @@ export default function Report() {
           </div>
         );
 
+      // ======== Default Dashboard ========
       default:
         return (
           <div className="space-y-6">
@@ -410,9 +456,6 @@ export default function Report() {
               <h1 className="text-2xl font-bold">
                 Welcome back, {user?.username?.split(" ")[0] ?? "User"}!
               </h1>
-              {/* <p className="mt-2 text-white/80">
-                Your health metrics are looking good today.
-              </p> */}
             </div>
 
             {/* Metric Cards */}
