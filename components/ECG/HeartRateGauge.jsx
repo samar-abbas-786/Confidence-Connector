@@ -5,11 +5,11 @@ export default function HeartRateGauge({ bpm, status = "unknown" }) {
 
   const color =
     status === "ok"
-      ? "#22c55e" // green
+      ? "#16a34a" // green
       : status === "warning"
-      ? "#f59e0b" // yellow
+      ? "#ca8a04" // yellow
       : status === "alert"
-      ? "#ef4444" // red
+      ? "#dc2626" // red
       : "#6b7280"; // gray
 
   return (
@@ -19,7 +19,7 @@ export default function HeartRateGauge({ bpm, status = "unknown" }) {
         <path
           d="M10,50 A40,40 0 0,1 90,50"
           fill="none"
-          stroke="#1f2937"
+          stroke="#d1d5db" // light gray
           strokeWidth="10"
         />
 
@@ -39,7 +39,7 @@ export default function HeartRateGauge({ bpm, status = "unknown" }) {
           x="50"
           y="38"
           textAnchor="middle"
-          fill="#e5e7eb"
+          fill="#111827" // dark gray/black for light theme
           fontSize="14"
           fontWeight="600"
         >
