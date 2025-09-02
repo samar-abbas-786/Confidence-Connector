@@ -42,12 +42,12 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: "Home", href: "/" },
+    // { name: "Home", href: "/" },
     { name: "About", href: "#about" },
-    { name: "Features", href: "#features" },
-    { name: "Team", href: "#team" },
-    { name: "Mentors", href: "#mentors" },
-    { name: "Contact", href: "#contact" },
+    // { name: "Features", href: "#features" },
+    // { name: "Team", href: "#team" },
+    // { name: "Mentors", href: "#mentors" },
+    // { name: "Contact", href: "#contact" },
     { name: "Report", href: "/report" },
     { name: "Chat", href: "/Conversation" },
   ];
@@ -78,7 +78,7 @@ const Navbar = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex ml-10 space-x-1">
+          <div className="hidden md:flex md:w-[30vw]  space-x-5">
             {navLinks.map((link) => (
               <a
                 key={link.name}
@@ -119,7 +119,11 @@ const Navbar = () => {
               className="inline-flex items-center justify-center p-2 rounded-lg text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300"
               aria-label="Toggle menu"
             >
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isMenuOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
             </button>
           </div>
         </div>
