@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef, useMemo } from "react";
 import dynamic from "next/dynamic";
+
 import {
   PieChart,
   Pie,
@@ -233,8 +234,11 @@ export default function Report() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex justify-center items-center text-gray-600">
-        Loading report...
+      <div className="min-h-screen flex justify-center items-center">
+        <div className="relative w-12 h-12">
+          <div className="absolute w-full h-full border-4 border-blue-500 rounded-full animate-spin border-t-transparent"></div>
+          <div className="absolute w-8 h-8 top-2 left-2 border-4 border-indigo-400 rounded-full animate-spin border-b-transparent"></div>
+        </div>
       </div>
     );
   }

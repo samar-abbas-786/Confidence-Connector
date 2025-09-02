@@ -2,6 +2,7 @@ import React from "react";
 import RevealScroll from "../Reveal";
 import Link from "next/link";
 
+
 const Hero = () => {
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 overflow-hidden">
