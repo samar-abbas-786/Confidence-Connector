@@ -52,7 +52,7 @@ ${conversationText}
 OUTPUT ONLY THE JSON OBJECT:`;
 
     // Get the model and generate content - FIXED API USAGE
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
     const result = await model.generateContent(prompt);
     const diagnosisText = result.response.text();
 
