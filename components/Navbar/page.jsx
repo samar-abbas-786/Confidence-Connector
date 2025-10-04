@@ -60,19 +60,19 @@ const Navbar = () => {
           <div className="flex items-center space-x-3">
             <div className="relative bg-white rounded-xl p-2 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
               <Image
-                src="/Conf.jpg"
+                src="/cure.jpg"
                 alt="Confidence Connector"
                 width={40}
                 height={40}
                 className="rounded-lg object-cover"
               />
             </div>
-            <div className="flex flex-col">
-              <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                Confidence Connector
+            <div className="flex font-bold flex-col text-center">
+              <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-black">
+                AI CONFIDENCE
               </span>
-              <span className="text-[10px] sm:text-xs text-gray-500 font-medium">
-                Innovative Engineering Solutions
+              <span className="text-[10px] sm:text-xs text-cyan-500 font-medium">
+                C U R E
               </span>
             </div>
           </div>
@@ -82,7 +82,7 @@ const Navbar = () => {
             {navLinks.map((link) => (
               <a
                 key={link.name}
-                href={link.href}
+                href={user ? link.href : "/login"}
                 className="relative group px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition-all duration-300 rounded-lg hover:bg-blue-50"
               >
                 {link.name}

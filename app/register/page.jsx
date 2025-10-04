@@ -34,6 +34,7 @@ export default function Register() {
       if (data) {
         localStorage.setItem("user", JSON.stringify(data.newUser));
       }
+      console.log("Auth data", data);
 
       if (res.ok) {
         router.push("/login");

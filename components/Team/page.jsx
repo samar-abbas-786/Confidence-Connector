@@ -10,37 +10,37 @@ export default function Team() {
       description:
         "Visionary leader and Mechanical Engineer driving strategic innovation.",
     },
-    {
-      name: "Mr. Abdul Wahid",
-      role: "Production Head",
-      image: "/Abdul-wahid.jpg",
-      description: "Leads efficient and quality-focused production operations.",
-    },
-    {
-      name: "Mr. Aman Khan",
-      role: "Sales and Marketing Head",
-      image: "/Mr.Aman Khan.jpg",
-      description: "Drives growth through strategic marketing and outreach.",
-    },
-    {
-      name: "Mr. Mohd Affan",
-      role: "Quality Head",
-      image: "/mohdaffan.webp",
-      description: "Ensures top-tier product quality through strict standards.",
-    },
-    {
-      name: "Mr. Amaan Ullah",
-      role: "Senior Mechanical Engineer",
-      image: "/amaanmultani.jpg",
-      description:
-        "Expert in precision-driven mechanical engineering solutions.",
-    },
-    {
-      name: "Mr. Arham Sajid",
-      role: "Senior Mechanical Engineer",
-      image: "/arhamsajid.jpg",
-      description: "Innovates in advanced mechanical system development.",
-    },
+    // {
+    //   name: "Mr. Abdul Wahid",
+    //   role: "Production Head",
+    //   image: "/Abdul-wahid.jpg",
+    //   description: "Leads efficient and quality-focused production operations.",
+    // },
+    // {
+    //   name: "Mr. Aman Khan",
+    //   role: "Sales and Marketing Head",
+    //   image: "/Mr.Aman Khan.jpg",
+    //   description: "Drives growth through strategic marketing and outreach.",
+    // },
+    // {
+    //   name: "Mr. Mohd Affan",
+    //   role: "Quality Head",
+    //   image: "/mohdaffan.webp",
+    //   description: "Ensures top-tier product quality through strict standards.",
+    // },
+    // {
+    //   name: "Mr. Amaan Ullah",
+    //   role: "Senior Mechanical Engineer",
+    //   image: "/amaanmultani.jpg",
+    //   description:
+    //     "Expert in precision-driven mechanical engineering solutions.",
+    // },
+    // {
+    //   name: "Mr. Arham Sajid",
+    //   role: "Senior Mechanical Engineer",
+    //   image: "/arhamsajid.jpg",
+    //   description: "Innovates in advanced mechanical system development.",
+    // },
     {
       name: "Mr. Samar Abbas",
       role: "CS and IT Associate",

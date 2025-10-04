@@ -28,8 +28,8 @@ const SmartHealthcareUI = () => {
       {/* Team Section */}
       <Team />
 
-      {/* Mentors Section */}
-      <Mentors />
+      {/* Mentors Section
+      <Mentors /> */}
 
       {/* Statistics Section */}
       <Statistics />
