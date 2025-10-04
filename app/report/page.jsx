@@ -12,6 +12,8 @@ import {
   XAxis,
   YAxis,
   ResponsiveContainer,
+  Tooltip,   //  adding this 04-10-2025 by Zia ul
+  Legend,    //  adding this 04-10-2025 by Zia ul
 } from "recharts";
 import Navbar from "@/components/Navbar/page";
 import Chatbot from "@/components/Chatbot/page";
@@ -47,6 +49,9 @@ export default function Report() {
   const [healthData, setHealthData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  // adding new state for history data (04-10-2025 by Zia ul)
+  const [historyData, setHistoryData] = useState([]);
+
 
   // ========= ECG state (ADDED) =========
   const [wsUrl, setWsUrl] = useState("ws://192.168.250.121:81");
@@ -106,6 +111,16 @@ export default function Report() {
         } else {
           setHealthData(null);
         }
+
+        // Fetch history data (04-10-2025 by Zia ul)
+        const resHistory = await fetch(`/api/health?userId=${storedUser.id}`);
+        const jsonHistory = await resHistory.json();
+        if (jsonHistory.healthRecords) {
+          setHistoryData(jsonHistory.healthRecords);
+        } else {
+          setHistoryData([]);
+        }
+
       } catch (err) {
         console.error("Failed to load health data:", err);
         setHealthData(null);
@@ -450,6 +465,75 @@ export default function Report() {
             </div>
           </div>
         );
+        // Adding History tab (04-10-2025 by Zia ul)
+        case "history":  
+          return (
+                <div className="space-y-6">
+                  <h2 className="text-2xl font-bold mb-4">Health History Dashboard</h2>
+
+                  {historyData.length === 0 ? (
+                    <p className="text-gray-500">No past records available.</p>
+                  ) : (
+                    <>
+                      {/* Combined Vitals Line Chart */}
+                      <div className="bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                        <h3 className="text-lg font-semibold mb-4">Vitals Over Time</h3>
+                        <div className="h-80">
+                          <ResponsiveContainer width="100%" height="100%">
+                            <LineChart data={historyData}>
+                              <XAxis dataKey="timestamp" />
+                              <YAxis />
+                              <Line type="monotone" dataKey="heartRate" stroke="#3B82F6" name="Heart Rate" />
+                              <Line type="monotone" dataKey="spo2" stroke="#10B981" name="SpO₂" />
+                              <Line type="monotone" dataKey="bodyTemp" stroke="#F59E0B" name="Body Temp" />
+                              <Line type="monotone" dataKey="ecg" stroke="#EF4444" name="ECG" />
+                              <Tooltip />
+                              <Legend />
+                            </LineChart>
+                          </ResponsiveContainer>
+                        </div>
+                      </div>
+
+                      {/* Diseases and Prescriptions */}
+                      <div className="grid md:grid-cols-2 gap-6">
+                        {historyData.map((h) => (
+                          <div key={h.id} className="bg-white p-5 rounded-xl shadow-md border border-gray-100">
+                            <h4 className="font-semibold mb-2">{h.timestamp}</h4>
+
+                            {/* Diseases */}
+                            <div className="mb-3">
+                              <h5 className="font-medium mb-1">Diagnosed Diseases:</h5>
+                              {h.diseases.length > 0 ? (
+                                <ul className="list-disc pl-5 text-gray-700">
+                                  {h.diseases.map((d, idx) => (
+                                    <li key={idx}>{d}</li>
+                                  ))}
+                                </ul>
+                              ) : (
+                                <p className="text-gray-500">None</p>
+                              )}
+                            </div>
+
+                            {/* Prescriptions */}
+                            <div>
+                              <h5 className="font-medium mb-1">Prescriptions:</h5>
+                              {h.prescriptions.length > 0 ? (
+                                <ul className="list-disc pl-5 text-gray-700">
+                                  {h.prescriptions.map((p, idx) => (
+                                    <li key={idx}>{p}</li>
+                                  ))}
+                                </ul>
+                              ) : (
+                                <p className="text-gray-500">None</p>
+                              )}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </>
+                  )}
+            </div>
+      );
 
       // ======== Default Dashboard ========
       default:
@@ -541,6 +625,8 @@ export default function Report() {
     { id: "ecg", label: "Live ECG" }, // NEW
     { id: "profile", label: "Profile" },
     { id: "analytics", label: "Analytics" },
+    // Adding History tab (04-10-2025 by Zia ul)
+    { id: "history", label: "History" }, 
   ];
 
   return (
